@@ -25,13 +25,13 @@ Scene variability prediction using DeltaVSG.
 # Paper
 If you find this useful for your research, please consider citing our paper:
 
-* Samuel Looper, Shao Zhou, Javier Rodriguez-Puigvert, Cesar Cadena, Roland Siegwart, and Lukas Schmid, "**3D VSG: Long-term Semantic Scene Change
+* Samuel Looper, Javier Rodriguez-Puigvert, Cesar Cadena, Roland Siegwart, and Lukas Schmid, "**3D VSG: Long-term Semantic Scene Change
 Prediction through 3D Variable Scene Graphs**", 2022.
   \[ \]
   ```bibtex
   @inproceedings{looper22vsg,
     title={3D VSG: Long-term Semantic Scene Change Prediction through 3D Variable Scene Graphs},
-    author={Looper, Samuel and Zhou, Shao and Rodriguez-Puigvert, Javier and Cadena, Cesar and Siegwart, Roland and Schmid, Lukas},
+    author={Looper, Samuel and Rodriguez-Puigvert, Javier and Cadena, Cesar and Siegwart, Roland and Schmid, Lukas},
     booktitle={},
     year={2022},
     volume={},
