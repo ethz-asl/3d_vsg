@@ -1,0 +1,19 @@
+jupyter-client==7.1.0
+pexpect>=4.3
+pygments
+defusedxml
+matplotlib==3.4.2
+networkx==2.5.1
+python-tsp
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==1.7.1
+--extra-index-url https://pytorch-geometric.com/whl/torch-1.7.1%2Bcpu.html
+torch-geometric==1.6.3 
+torch-sparse==0.6.8
+torch-scatter==2.0.6
+torchaudio==0.7.2
+torchvision==0.8.2
+tqdm==4.50.0
+scikit-learn==0.23.2
+vedo==2022.3.0
+gdown
