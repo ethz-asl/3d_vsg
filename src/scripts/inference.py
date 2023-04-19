@@ -1,30 +1,28 @@
-import torch
 import os
-import subprocess
-import json
-import pickle
+import torch
 from tqdm import tqdm
-import numpy as np
-from src.models import SimpleMPGNN, SimpleMLP, SimpleSA, PPNBaseline
-from src.dataset import SceneGraphChangeDataset
 from config import DatasetCfg
-from src.utils import build_scene_graph, format_scan_dict, visualize_graph, visualize_results, get_dataset_files
+from src.dataset import SceneGraphChangeDataset
+from src.models import SimpleMPGNN, SimpleMLP, SimpleSA, PPNBaseline
+from src.utils import build_scene_graph, visualize_graph, visualize_results, get_dataset_files
 
 
-def vis_test_sample(scan_dir, in_scan_id, out_scan_id, predicted_var, actual_var):
+def vis_test_sample(scan_dir, in_scan_id, out_scan_id, predicted_var, actual_var, vis_io=False):
     ply_file = "labels.instances.annotated.v2.ply"
     objects_dict, relationships_dict = get_dataset_files(scan_dir)
     sem_seg_dir = os.path.join(scan_dir, "semantic_segmentation_data")
     # Visualize Graph
-    print("Visualizing Input Graph")
     in_mesh_path = os.path.join(sem_seg_dir, in_scan_id, ply_file)
     in_graph, in_nodes, in_edges = build_scene_graph(objects_dict, relationships_dict, in_scan_id, sem_seg_dir)
-    # visualize_graph(in_mesh_path, in_nodes, in_edges)
+    if vis_io:
+        print("Visualizing Input Graph")
+        visualize_graph(in_mesh_path, in_nodes, in_edges)
 
-    print("Visualizing Output Graph")
-    out_mesh_path = os.path.join(sem_seg_dir, out_scan_id, ply_file)
-    out_graph, out_nodes, out_edges = build_scene_graph(objects_dict, relationships_dict, out_scan_id, sem_seg_dir)
-    # visualize_graph(out_mesh_path, out_nodes, out_edges)
+    if vis_io:
+        print("Visualizing Output Graph")
+        out_mesh_path = os.path.join(sem_seg_dir, out_scan_id, ply_file)
+        out_graph, out_nodes, out_edges = build_scene_graph(objects_dict, relationships_dict, out_scan_id, sem_seg_dir)
+        visualize_graph(out_mesh_path, out_nodes, out_edges)
 
     # Visualizing Results
     result_type = "Instance"
@@ -56,15 +54,6 @@ if __name__ == "__main__":
     dataset_cfg = DatasetCfg()
     dataset = SceneGraphChangeDataset(cfg=dataset_cfg)
 
-    # splits = [866, 879, 2108, 2112, 3109, 3130, 3508, 3512, 3569, 3574]
-    # graphs = []
-    # for split in splits:
-    #     in_graph = dataset[split].input_graph
-    #     out_graph = dataset[split].output_graph
-    #     graphs.append(in_graph)
-    #     graphs.append(out_graph)
-    # print(list(set(graphs)))
-
     splits = []
     for i in range(len(dataset)):
         in_graph = dataset[i].input_graph
@@ -82,7 +71,8 @@ if __name__ == "__main__":
         "results_path": dataset_cfg.results_path
     }
 
-    model = SimpleMPGNN(dataset.num_node_features, dataset.num_classes, dataset.num_edge_features, hyperparams["hidden_layers"])
+    model = SimpleMPGNN(dataset.num_node_features, dataset.num_classes, dataset.num_edge_features,
+                        hyperparams["hidden_layers"])
     model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
     model.eval()
 

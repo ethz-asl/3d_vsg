@@ -1,11 +1,9 @@
-from src.dataset.Relationships3DSSG import Relationships3DSSG
-from config import DatasetCfg
-import itertools
-import logging
 import torch
+import itertools
 from typing import List, Tuple
 
-logger = logging.getLogger(__name__)
+from config import DatasetCfg
+from src.dataset.Relationships3DSSG import Relationships3DSSG
 
 
 def get_relative_dist(node_1: Tuple, node_2: Tuple) -> torch.Tensor:

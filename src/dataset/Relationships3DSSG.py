@@ -1,6 +1,7 @@
-from collections.abc import Sequence
+from typing import List
 from enum import IntEnum, unique
-from typing import Tuple, List, Set
+from collections.abc import Sequence
+
 
 @unique
 class Relationships3DSSG(IntEnum):
@@ -29,7 +30,6 @@ class Relationships3DSSG(IntEnum):
             return Relationships3DSSG.key_to_value(e)
         except KeyError:
             raise ValueError(f"{raw} cannot be converted to known attributes")
-
 
     none = 0
     supported_by = 1

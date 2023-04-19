@@ -24,10 +24,9 @@ class SelfAttentionLayer(torch.nn.Module):
 class SimpleSA(torch.nn.Module):
     """Implementation of a simple multilayer perception with self-attention, as proposed in
     LayoutTransformer (Gupta et al.)"""
-    def __init__(self, n_node_features, n_out_classes, hidden_layers):
+    def __init__(self, n_node_features, n_out_classes):
         super().__init__()
         self.sa1 = SelfAttentionLayer(n_node_features, n_node_features)
-        # self.sa1 = torch.nn.MultiheadAttention(n_node_features, 1)
         self.fc1 = torch.nn.Linear(n_node_features, n_node_features)
         self.relu1 = torch.nn.ReLU()
         self.relu2 = torch.nn.ReLU()

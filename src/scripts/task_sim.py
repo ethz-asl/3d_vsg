@@ -1,14 +1,14 @@
+import os
+import pickle
 import torch
+import numpy as np
+from tqdm import tqdm
+from python_tsp.heuristics import solve_tsp_simulated_annealing
 
 from config import DatasetCfg
 from src.dataset import SceneGraphChangeDataset
 from src.models import SimpleMPGNN, FocalLoss
 from src.utils.extract_data import build_scene_graph, transform_locations
-from tqdm import tqdm
-from python_tsp.heuristics import solve_tsp_simulated_annealing
-import numpy as np
-import pickle
-import os
 
 
 def calc_path_cost(path, node_data_1, node_data_2, var_label, n_obj):
@@ -145,7 +145,8 @@ if __name__ == "__main__":
         "results_path": dataset_cfg.results_path
     }
 
-    model = SimpleMPGNN(dataset.num_node_features, dataset.num_classes, dataset.num_edge_features, hyperparams["hidden_layers"])
+    model = SimpleMPGNN(dataset.num_node_features, dataset.num_classes, dataset.num_edge_features,
+                        hyperparams["hidden_layers"])
     model.load_state_dict(torch.load(dataset_cfg.task_sim.model_path, map_location=device))
     model.eval()
 

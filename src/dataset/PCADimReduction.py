@@ -1,9 +1,5 @@
-from dataclasses import dataclass
-import logging
-from sklearn.decomposition import PCA
 import torch
-
-logger = logging.getLogger(__name__)
+from sklearn.decomposition import PCA
 
 
 class PCADimReduction:
