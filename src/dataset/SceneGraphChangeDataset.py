@@ -1,12 +1,13 @@
-import torch
 import os
-from torch_geometric.data import InMemoryDataset, Data
 import json
 import time
+import torch
 from typing import List, Dict
+from torch_geometric.data import InMemoryDataset, Data
+
 from config import DatasetCfg
-from src.dataset import BinaryNodeEmbedding, BinaryVariabilityEmbedding, BinaryEdgeEmbedding, PCADimReduction
 from src.utils import build_scene_graph, get_change_list, get_scene_list, get_dataset_files
+from src.dataset import BinaryNodeEmbedding, BinaryVariabilityEmbedding, BinaryEdgeEmbedding, PCADimReduction
 
 
 class SceneGraphChangeDataset(InMemoryDataset):
@@ -20,12 +21,13 @@ class SceneGraphChangeDataset(InMemoryDataset):
 
         if not cfg.load:
             # If load set to False, will move any processed dataset to a new repo
-            if len(os.listdir(os.path.join(self.root, "processed"))) > 0:
-                old_root = os.path.join(self.root, "old_processed")
-                if not os.path.exists(old_root):
-                    os.makedirs(old_root)
-                new_folder_name = time.strftime("%Y_%m_%d_%H_%M_%S")
-                os.rename(os.path.join(self.root, "processed"), os.path.join(old_root, new_folder_name))
+            if os.path.isdir(os.path.join(self.root, "processed")):
+                if len(os.listdir(os.path.join(self.root, "processed"))) > 0:
+                    old_root = os.path.join(self.root, "old_processed")
+                    if not os.path.exists(old_root):
+                        os.makedirs(old_root)
+                    new_folder_name = time.strftime("%Y_%m_%d_%H_%M_%S")
+                    os.rename(os.path.join(self.root, "processed"), os.path.join(old_root, new_folder_name))
 
         super().__init__(self.root, transform, pre_transform, pre_filter)
         self.data, self.slices = torch.load(self.processed_paths[0])

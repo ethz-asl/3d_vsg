@@ -47,8 +47,8 @@ Prediction through 3D Variable Scene Graphs**", accepted for *IEEE International
     ```
 2. Create a Python environment. We recommend using [conda](https://docs.conda.io/en/latest/):
     ```bash
-    conda create --name deltavsg python=3.8
-    conda activate deltavsg
+    conda create --name 3dvsg python=3.8
+    conda activate 3dvsg
     pip install -r requirements.txt
     
     ```

@@ -1,12 +1,12 @@
-from torch_geometric.data import DataLoader
-from tqdm import tqdm
-import pickle
 import torch
 import random
-import os
-from src.utils import TrainingLogger, calculate_conf_mat
+import pickle
+from tqdm import tqdm
+from torch_geometric.data import DataLoader
+
 from config import DatasetCfg
 from src.dataset import SceneGraphChangeDataset
+from src.utils import TrainingLogger, calculate_conf_mat
 from src.models import SimpleMPGNN, SimpleMLP, SimpleSA, PPNBaseline, FocalLoss
 
 

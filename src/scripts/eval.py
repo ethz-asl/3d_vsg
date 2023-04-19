@@ -1,12 +1,11 @@
 import torch
-from torch.utils.data import DataLoader
-from src.dataset import SceneGraphChangeDataset
+import pickle
+from tqdm import tqdm
+
 from config import DatasetCfg
 from src.utils import EvalLogger
+from src.dataset import SceneGraphChangeDataset
 from src.models import SimpleMPGNN, SimpleMLP, SimpleSA, PPNBaseline, FocalLoss
-import numpy as np
-from tqdm import tqdm
-import pickle
 
 
 def calculate_conf_mat(pred, label):
@@ -68,7 +67,8 @@ if __name__ == "__main__":
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # Define DeltaVSG model
-    model = SimpleMPGNN(dataset.num_node_features, dataset.num_classes, dataset.num_edge_features, hyperparams["hidden_layers"]).to(device)
+    model = SimpleMPGNN(dataset.num_node_features, dataset.num_classes, dataset.num_edge_features,
+                        hyperparams["hidden_layers"]).to(device)
     model.load_state_dict(torch.load(model_path))
     model.eval()
     
