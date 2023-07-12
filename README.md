@@ -25,14 +25,14 @@ Scene variability prediction using DeltaVSG.
 If you find this useful for your research, please consider citing our paper:
 
 * Samuel Looper, Javier Rodriguez-Puigvert, Roland Siegwart, Cesar Cadena, and Lukas Schmid, "**3D VSG: Long-term Semantic Scene Change
-Prediction through 3D Variable Scene Graphs**", accepted for *IEEE International Conference on Robotics and Automation (ICRA)*, 2023. \[ [ArXiv](https://arxiv.org/abs/2209.07896) \]
+Prediction through 3D Variable Scene Graphs**", accepted for *IEEE International Conference on Robotics and Automation (ICRA)*, 2023. \[ [IEEE](https://ieeexplore.ieee.org/document/10161212) | [ArXiv](https://arxiv.org/abs/2209.07896) \]
   ```bibtex
   @inproceedings{looper22vsg,
   author = {Looper, Samuel and Rodriguez-Puigvert, Javier and Siegwart, Roland and Cadena, Cesar and Schmid, Lukas},  
   title = {3D VSG: Long-term Semantic Scene Change Prediction through 3D Variable Scene Graphs},
   publisher = {IEEE International Conference on Robotics and Automation (ICRA)},
   year = {2023},
-  doi = {10.48550/ARXIV.2209.07896},
+  doi = {10.1109/ICRA48891.2023.10161212},
   }
   ```
   
